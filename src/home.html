@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Woodcote Nursery</title>
+        <link rel="stylesheet" href="../css/garden.css"/>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>   
+        <script  type='text/babel'>
+
+            class Images extends React.Component {
+
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        imgName:"",
+                        colour:""
+                    };
+                }
+                render() { 
+                    return (                        
+                          <img src={'../img/'+this.props.imgName} name={this.props.imgName} data-colour={this.props.colour}/>                           
+                        );
+                    }
+            }
+            class NavMenu extends React.Component {
+
+                showImages = (e) => {
+                    let elem = e.currentTarget;
+                    const images =  (
+                        <div class="gallery">
+                            <Images imgName={`${elem.dataset.colour}_Dahlia1.jpg`} colour={elem.dataset.colour}/>
+                            <Images imgName={`${elem.dataset.colour}_Dahlia2.jpg`} colour={elem.dataset.colour}/>
+                            <Images imgName={`${elem.dataset.colour}_Dahlia3.jpg`} colour={elem.dataset.colour}/>
+                        </div>
+                    );
+                    return ReactDOM.render(images, document.querySelector("#flowers"));                    
+                }
+                
+                render() {
+                    return (                         
+                        <ul>
+                            <li id="flower" data-option="Flowers">
+                                <label>Flowers</label>
+                                <ul>
+                                    <li onClick={this.showImages} data-colour="Pink"> Pink </li>
+                                    <li onClick={this.showImages} data-colour="Red"> Red </li>
+                                    <li onClick={this.showImages} data-colour="Orange"> Orange </li>
+                                    <li onClick={this.showImages} data-colour="Yellow"> Yellow </li>
+                                </ul>
+                            </li>                                               
+                        </ul>
+                    )
+                }
+            }
+            ReactDOM.render(<NavMenu />, document.querySelector("#navMenu"));
+                       
+            class Gallery extends React.Component {
+
+                render() { 
+                    return (
+                        <div class="gallery">
+                            <Images imgName="Pink_Dahlia1.jpg" colour="pink"/>
+                            <Images imgName="Pink_Dahlia2.jpg" colour="pink"/>
+                            <Images imgName="Pink_Dahlia3.jpg" colour="pink"/>
+                            <Images imgName="Pink_Dahlia4.jpg" colour="pink"/>
+                            <Images imgName="Red_Dahlia1.jpg" colour="red"/>
+                            <Images imgName="Red_Dahlia2.jpg" colour="red"/>
+                            <Images imgName="Orange_Dahlia1.jpg" colour="orange"/>
+                            <Images imgName="Orange_Dahlia2.jpg" colour="orange"/>         
+                            <Images imgName="Yellow_Dahlia1.jpg" colour="yellow"/>
+                            <Images imgName="Yellow_Dahlia2.jpg" colour="yellow"/>     
+                        </div>          
+                    );
+                }
+                
+            }
+
+             ReactDOM.render(<Gallery />, document.querySelector("#flowers"));
+        </script>
+        
+    </head>
+    <body>
+        <div id="header" class="header">
+            <h3>Welcome to Woodcote Nursery! </h3>
+        </div>
+        <div id="navMenu" class="navigation">
+            
+        </div>
+        <main>
+            <div id="flowers">
+                  
+            </div>         
+        </main>
+     
+    </body>
+</html>
